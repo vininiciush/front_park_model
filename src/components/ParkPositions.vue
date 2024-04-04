@@ -1,4 +1,5 @@
 <template>
+    
     <div class="parking-lot">
         <ParkCard
             v-for="park in loadData.content"
@@ -10,8 +11,8 @@
     </div>
     <PageableCard
         class="pageable"
-        :currentPage = currentPage
-        :totalPages = loadData.totalPages
+        :currentPage="currentPage"
+        :totalPages="loadData.totalPages"
         :nextPage="nextParkPage"
         :backPage="backParkPage"
     >
@@ -23,31 +24,37 @@
 import ParkCard from './ParkCard.vue';
 import PageableCard from './PageableCard.vue'
 import axios from 'axios'
+
 export default {
     components: {
         ParkCard,
         PageableCard
     },
+    inject: ['$bus'],
     created(){
-        this.updateParkFromApi();
+        this.$bus.$on('DateChange', (param) => {
+            this.currentDate = param.date
+            this.updateParkFromApi(param.date)
+        });
     },
     data(){
         return {
             loadData: {},
-            currentPage: 0
+            currentPage: 0,
+            currentDate: undefined
         }
     },
     methods: {
         nextParkPage(){
             this.currentPage ++;
-            this.updateParkFromApi();
+            this.updateParkFromApi(this.currentDate);
         },
         backParkPage(){
             this.currentPage --;
-            this.updateParkFromApi();
+            this.updateParkFromApi(this.currentDate);
         },
-        async updateParkFromApi() {
-            var url = 'http://localhost:8080/v1/sensors/load?page='+ this.currentPage +'&size=12&date=2024-03-28';
+        async updateParkFromApi(actualDate) {
+            var url = 'http://localhost:8080/v1/sensors/load?page='+ this.currentPage +'&size=12&date=' + actualDate;
             var info = await axios.get(url)
             this.loadData = info.data;
         }

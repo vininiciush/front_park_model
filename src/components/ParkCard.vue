@@ -27,7 +27,9 @@ export default {
     border: 10px;
     border-style: solid;
     border-color: yellow;
-    margin: 10px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 10px;
     border-bottom: none;
 }
 
