@@ -31,7 +31,7 @@
     },
     methods:{
       async updateChartWithApiData(actualDate) {
-        var url = 'http://localhost:8080/v1/sensors/park/load?date=' + actualDate;
+        var url = 'http://localhost:8085/v1/sensors/park/load?date=' + actualDate;
         var info = await axios.get(url)
         var chartData = info.data;
         const sensors = chartData.map(obj => obj.sensors);

@@ -54,7 +54,7 @@ export default {
             this.updateParkFromApi(this.currentDate);
         },
         async updateParkFromApi(actualDate) {
-            var url = 'http://localhost:8080/v1/sensors/load?page='+ this.currentPage +'&size=12&date=' + actualDate;
+            var url = 'http://localhost:8085/v1/sensors/load?page='+ this.currentPage +'&size=12&date=' + actualDate;
             var info = await axios.get(url)
             this.loadData = info.data;
         }
