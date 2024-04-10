@@ -1,6 +1,6 @@
 <template>
   <div class="park-position">
-    <div class="park-sensor">
+    <div class="park-sensor" :style="{'background-color' : this.park.isActive ? 'green' : 'red'}">
 
     </div>
     <div style="margin-bottom: 10px">
@@ -14,7 +14,10 @@
 
 <script>
 export default {
-    props: ['park']
+    props: ['park'],
+    created(){
+        console.log(this.park.isActive)
+    }
 }
 </script>
 
@@ -34,7 +37,6 @@ export default {
 }
 
 .park-sensor {
-    background-color: red;
     height: 20px;
     width: 20px;
     margin: auto;
