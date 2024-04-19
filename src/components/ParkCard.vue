@@ -1,6 +1,6 @@
 <template>
   <div class="park-position">
-    <div class="park-sensor" :style="{'background-color' : this.park.isActive ? 'green' : 'red'}">
+    <div class="park-sensor" :style="{'background-color' : this.park.isActive ? 'red' : 'green'}">
 
     </div>
     <div style="margin-bottom: 10px">
